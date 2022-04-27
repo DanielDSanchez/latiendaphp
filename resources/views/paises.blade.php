@@ -13,7 +13,7 @@
         <h1 class="text-center"> Paises</h1>
     </div>
     <div class="col-md-4 mx-auto justify-content-center mt-5 "> 
-        <table class="table border border-info table-hover table-info text-center table-striped">
+        <table class="table table-bordered border- table-hover table-dark text-center table-striped">
         <thead>
             <tr>
                 <th>Pais</th>
@@ -26,12 +26,12 @@
         <tbody>
                 @foreach($paises as $nombre => $pais)
                 <tr >
-                    <td class="" rowspan='{{  count($pais["Ciudades"])  }}'>{{$nombre}}</td>
-                    <td rowspan='{{  count($pais["Ciudades"])  }}'>{{$pais["Capital"]}}</td>
-                    <td rowspan='{{  count($pais["Ciudades"])  }}'>{{$pais["Moneda"]}}</td>
-                    <td rowspan='{{  count($pais["Ciudades"])  }}'>{{$pais["Poblacion"]}}</td>
+                    <td class="text-danger" rowspan='{{  count($pais["Ciudades"])  }}'><b>{{$nombre}}</B></td>
+                    <td  class="text-success" rowspan='{{  count($pais["Ciudades"])  }}'><b>{{$pais["Capital"]}}</B></td>
+                    <td class="text-info bg-dark" rowspan='{{  count($pais["Ciudades"])  }}'>{{$pais["Moneda"]}}</td>
+                    <td class="text-white bg-dark" rowspan='{{  count($pais["Ciudades"])  }}'>{{$pais["Poblacion"]}}</td>
                     @foreach($pais["Ciudades"] as $Ciudad )
-                    <td >{{$Ciudad}}</td>
+                    <td class="text-warning bg-dark" >{{$Ciudad}}</td>
                     </tr>
                     @endforeach
                 

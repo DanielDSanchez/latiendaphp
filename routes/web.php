@@ -79,9 +79,10 @@ Route::get('paises',function(){
             "Moneda" => "Soles",
             "Poblacion" => 32.97,
             "Ciudades" => [
-                "Medellin",
-                "Barranquilla",
-                "Cali"
+                "cusco",
+                "Arequipa",
+                "Trujillo",
+                "Huaraz"
             ]
         ],
         "Paraguay" => [
@@ -89,9 +90,35 @@ Route::get('paises',function(){
             "Moneda" => "Guarani",
             "Poblacion" => 7.1,
             "Ciudades" => [
-                "Medellin",
-                "Barranquilla",
-                "Cali"
+                "Encarnacion",
+                "Villarica",
+                "Luque",
+                "Pilar",
+                "Ita"
+            ]
+        ],
+        "Chile" => [
+            "Capital" => "Santiago de Chile",
+            "Moneda" => "Peso Chileno",
+            "Poblacion" => 7.1,
+            "Ciudades" => [
+                "Iquique",
+                "Villarica",
+                "Luque",
+                "Pilar",
+                "Ita"
+            ]
+        ],
+        "Brazil" => [
+            "Capital" => "Sao Paulo",
+            "Moneda" => "Real brasileño",
+            "Poblacion" => 7.1,
+            "Ciudades" => [
+                "Encarnacion",
+                "Villarica",
+                "Luque",
+                "Pilar",
+                "Ita"
             ]
         ]
         
