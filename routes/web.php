@@ -130,3 +130,8 @@ Route::get('paises',function(){
 
 Route::get('/tiendas/mostraregistro',[TiendaController::class, 'create']);
 Route::post('/tiendas/mostrarexito',[TiendaController::class, 'store']);
+
+Route::get('prueba',function(){
+
+    return view('Productos.create');
+});
