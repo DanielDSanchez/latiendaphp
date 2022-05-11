@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         Categoria::factory(10)->create();
+        Marca::factory(10)->create();
+
     }
 }

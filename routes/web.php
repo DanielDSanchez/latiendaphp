@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -128,10 +128,13 @@ Route::get('paises',function(){
 
 });
 
-Route::get('/tiendas/mostraregistro',[TiendaController::class, 'create']);
-Route::post('/tiendas/mostrarexito',[TiendaController::class, 'store']);
 
 Route::get('prueba',function(){
 
     return view('Productos.create');
 });
+
+/**
+ * Rutas REST  Producto
+ */
+Route::resource( 'Productos',ProductoController::class );
