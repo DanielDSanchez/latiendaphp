@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Marca;
 use App\Models\Categoria;
 use App\Models\Producto;
-use Illuminate\Http\Request;
+use App\http\Requests\StoreProductoRequest;
+use Illuminate\Support\Facades\Validator;
 
 class ProductoController extends Controller
 {
@@ -15,7 +16,10 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        echo "Catalogo Productos";
+        $productos = Producto::all();
+
+        return view('productos.index')
+                ->with('productos',$productos);
     }
 
     /**
@@ -53,8 +57,21 @@ class ProductoController extends Controller
         $p->marca_id = $request->marca;
         $p->categoria_id = $request->categoria;
         
+        $archivo = $request->imagen;
+        $p->imagen = $archivo->getClientOriginalName();
+
+        
+        $archivo->move(public_path()."/img" , 
+        $archivo->getClientOriginalName());
+        
         $p->save();
-        echo "producto registrado";
+        //var_dump($request->imagen->getClientOriginalName());
+        //$request->imagen->move('public/img');
+        //echo "<hr/>";
+        //var_dump(public_path());
+        //$p->save();
+        return redirect('Productos/create')
+        ->with('mensaje',"producto registrado exitosamente");
     }
 
     /**
