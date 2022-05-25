@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Marca;
 use App\Models\Categoria;
 use App\Models\Producto;
-use App\http\Requests\StoreProductoRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\http\Requests\StoreProductoRequest;
+
 
 class ProductoController extends Controller
 {

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('materialize/css/materialize.css') }}">
+    
 
 </head>
 <body>
@@ -33,9 +34,12 @@
 </div>
 <script src="{{ asset('materialize/js/materialize.js')}}"></script>
 <script>
+    M.AutoInit();
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, []);
+    let tabs = document.querySelecter(".tabs");
+    var instance = M.tabsinit(tabs);
   });
   </script>
 </body>
