@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,124 +18,80 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//primera ruta
+//class route -> metodo get
 
-
-Route::get('hola',function(){
-    echo "<center><h1>Hola</h1></center>";
-} ); 
-
-Route::get('arreglo',function(){
-  $estudiantes = [
-       "AN" => "Angie",
-        "CO" => "Coja oficio"
-
-    ];
-                        /*echo "<pre>";
-                        echo "<h1><center>";
-                        var_dump($estudiantes);
-                        echo "</h1></center>";
-                        echo "<pre>";
-                        echo "<hr />";
-                        echo "<h1><center>";
-                        $estudiantes = 1;
-                        var_dump($estudiantes);
-                        echo "</h1></center>";*/
-    echo "<hr />";
-    foreach($estudiantes as $e){
-        echo $e;
-        echo "<hr />";
-    }
-    
-
-    unset( $estudiantes["AN"]);
-    echo "<hr />";
-    foreach($estudiantes as $e){
-        echo $e;
-        echo "<hr />";
-    }
-    unset( $estudiantes["CO"]);
-    
-
-    $estudiantes[]="Carlos";
-    var_dump($estudiantes);
-
+Route::get('hola', function(){
+    echo "Hola le dijo la araña a la mosca";
 });
 
-
-
-Route::get('paises',function(){
-    $paises = [
-        "Colombia" => [
-            "Capital" => "Bogota",
-            "Moneda" => "Peso",
-            "Poblacion" => 50.88,
-            "Ciudades" => [
-                "Medellin",
-                "Barranquilla",
-                "Cali"
-            ]
-        ],
-        "Peru" => [
-            "Capital" => "Lima",
-            "Moneda" => "Soles",
-            "Poblacion" => 32.97,
-            "Ciudades" => [
-                "cusco",
-                "Arequipa",
-                "Trujillo",
-                "Huaraz"
-            ]
-        ],
-        "Paraguay" => [
-            "Capital" => "Asuncion",
-            "Moneda" => "Guarani",
-            "Poblacion" => 7.1,
-            "Ciudades" => [
-                "Encarnacion",
-                "Villarica",
-                "Luque",
-                "Pilar",
-                "Ita"
-            ]
+Route::get('paises', function(){
+   $paises =[
+       "Colombia" => [
+           "cap" => "Bogotá",
+           "mon" => "Peso",
+           "pob" => 51.6,
+           "ciudades" => [
+               "Medellin",
+               "Cali",
+               "Barranquilla"
+           ]
+           ],
+       "Peru" => [
+        "cap" => "Lima",
+        "mon" => "Sol",
+        "pob" => 32.9,
+        "ciudades" => [
+            "Cusco",
+            "Trujillo"
+        ]
         ],
         "Chile" => [
-            "Capital" => "Santiago de Chile",
-            "Moneda" => "Peso Chileno",
-            "Poblacion" => 7.1,
-            "Ciudades" => [
+            "cap" => "Santiago de Chile",
+            "mon" => "Peso",
+            "pob" => 12.1,
+            "ciudades" => [
                 "Iquique",
-                "Villarica",
-                "Luque",
-                "Pilar",
-                "Ita"
-            ]
-        ],
-        "Brazil" => [
-            "Capital" => "Sao Paulo",
-            "Moneda" => "Real brasileño",
-            "Poblacion" => 7.1,
-            "Ciudades" => [
-                "Encarnacion",
-                "Villarica",
-                "Luque",
-                "Pilar",
-                "Ita"
-            ]
-        ]
-        
-    ];
+                "Concepción",
+                "Valparaíso",
+                "Temuco"
 
-    return view('paises')->with('paises',$paises);
-
+            ]
+            ],
+            "Argentina" => [
+                "cap" => "Buenos Aires",
+                "mon" => "Peso",
+                "pob" => 45.3,
+                "ciudades" => [
+                    "Rosario",
+                    "Córdoba",
+                    "Mar del Plata"
+                ]
+                ],
+                "Mexico" => [
+                    "cap" => "Ciudad de México",
+                    "mon" => "Peso",
+                    "pob" => 128.9,
+                    "ciudades" => [
+                        "Guadalajara",
+                        "Cancún",
+                        "Guanajuato",
+                        "Monterrey",
+                        "Mexicali"
+                    ]
+                ]
+   ] ;
+   return view('paises')
+            ->with("paises", $paises);
 });
 
-
-Route::get('prueba',function(){
-
-    return view('Productos.create');
+Route::get('prueba', function(){
+    return view('productos.create');
 });
 
 /**
- * Rutas REST  Producto
+ * Rutas REST Producto
  */
-Route::resource( 'Productos',ProductoController::class );
+Route::resource('productos', ProductoController::class);
+
+Route::resource('cart', CartController::class, ['only'=>[ 'index' , 'store', 'destroy' ]]);

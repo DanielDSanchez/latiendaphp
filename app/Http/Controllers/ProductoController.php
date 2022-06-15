@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Marca;
 use App\Models\Categoria;
 use App\Models\Producto;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreProductoRequest;
 use Illuminate\Support\Facades\Validator;
-use App\http\Requests\StoreProductoRequest;
-
 
 class ProductoController extends Controller
 {
@@ -18,10 +17,11 @@ class ProductoController extends Controller
      */
     public function index()
     {
+        //seleccionar los productos en un arreglo
         $productos = Producto::all();
-
+        //mostrar la vista del catálogo
         return view('productos.index')
-                ->with('productos',$productos);
+            ->with('productos', $productos);
     }
 
     /**
@@ -31,15 +31,13 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //Seleccionar Marcas con Modelo Marca
+        //Seleccionar marcas en bd: Model Marca
         $marcas = Marca::all();
-        //Seleccionar Categorias con Modelo Categoria
+        //Seleccionar categorias en bd: Model Categoria
         $categorias = Categoria::all();
-        return view('productos.create')
-            ->with("marcas",$marcas)
-            ->with("Categorias",$categorias)
-        ;
-
+        return view("productos.create")
+        ->with("marcas", $marcas)
+        ->with("categorias", $categorias);
     }
 
     /**
@@ -48,32 +46,29 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductoRequest $request)
     {
-        
-        var_dump($request->all());
-        $p = new Producto();
-        $p->Nombre = $request->nombre;
-        $p->Descripcion = $request->desc;
-        $p->Precio = $request->precio;
-        $p->marca_id = $request->marca;
-        $p->categoria_id = $request->categoria;
-        
-        $archivo = $request->imagen;
-        $p->imagen = $archivo->getClientOriginalName();
+            //validacion exitosa
+         $p = new Producto();
+         $p->nombre = $request->nombre; 
+         $p->descripcion = $request->desc; 
+         $p->precio = $request->precio; 
+         $p->marca_id = $request->marca; 
+         $p->categoria_id = $request->categoria;
 
-        
-        $archivo->move(public_path()."/img" , 
-        $archivo->getClientOriginalName());
-        
-        $p->save();
-        //var_dump($request->imagen->getClientOriginalName());
-        //$request->imagen->move('public/img');
-        //echo "<hr/>";
-        //var_dump(public_path());
-        //$p->save();
-        return redirect('Productos/create')
-        ->with('mensaje',"producto registrado exitosamente");
+        //objeto file
+         $archivo = $request->imagen;
+         $p -> imagen = $archivo->getClientOriginalName();
+         //donde se almacena
+         $ruta = public_path()."/img";
+        //movemos archivo ruta
+         $archivo->move($ruta,
+                            $archivo->getClientOriginalName());
+         $p->save();
+         
+         //redireccionar
+         return redirect('productos/create')
+         ->with('mensaje', "Producto registrado correctamente");
     }
 
     /**
@@ -84,7 +79,12 @@ class ProductoController extends Controller
      */
     public function show($producto)
     {
-        echo "Detalle Producto";
+        //seleccionar el producto a mostrar
+        $p = Producto::find($producto);
+        //mostrar el detalle de producto
+        //enviandole el producto seleccionado
+        return view('productos.details')
+                ->with('producto', $p);
     }
 
     /**
@@ -93,9 +93,9 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit($producto)
     {
-        echo "Form editar Producto";
+        echo "Aquí se muestra el formulario de editar producto";
     }
 
     /**
@@ -107,7 +107,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        echo "Actualizar Producto";
+        echo "Aquí se va a guardar el producto editado";
     }
 
     /**
@@ -118,6 +118,6 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        echo "Eliminar Producto";
+        echo "Aquí se eliminará el producto";
     }
 }

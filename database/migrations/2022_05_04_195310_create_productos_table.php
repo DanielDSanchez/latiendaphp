@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->string('Nombre');
-            $table->text('Imagen');
-            $table->longText('Descripcion');
-            $table->decimal('Precio', 8, 2);
+            $table->string('nombre');
+            $table->text('imagen')-> nullable();
+            $table->longtext('descripcion');
+            $table->decimal('precio', 8 , 2);
             $table->foreignId('marca_id')->constrained();
             $table->foreignId('categoria_id')->constrained();
             $table->timestamps();

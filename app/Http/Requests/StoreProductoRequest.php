@@ -30,7 +30,7 @@ class StoreProductoRequest extends FormRequest
         "precio" => 'required|numeric|max:10000',
         "categoria" => 'required',
         "marca" => 'required',
-        "imagen" => 'required|image|unique:productos,imagen'
+        "imagen" => 'image|required',
 
     ];
     }
@@ -44,6 +44,7 @@ class StoreProductoRequest extends FormRequest
             'alpha' => 'Solo letras',
             'max' => 'máximo :max carácteres',
             'numeric' => 'Solo números',
+            'unique' => 'El producto ya existe',
         ];
     }
 }
